@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-
 def canUnlockAll(boxes):
+    if not boxes or len(boxes) == 0:
+        return False
     keys = boxes[0]
     keys.insert(0, 0)
     return go_to_box(keys, boxes)
-
 
 def go_to_box(keys, boxes):
     for key in keys:
