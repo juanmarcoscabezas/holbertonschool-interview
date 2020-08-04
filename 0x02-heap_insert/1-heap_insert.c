@@ -67,7 +67,7 @@ heap_t *free_space(heap_t *root)
 /**
  * swap_nodes - Changes the new node position to his real one
  * @node: Node to change position
- * Return:
+ * Return: The new position of the node
  */
 heap_t *swap_nodes(heap_t *node)
 {
