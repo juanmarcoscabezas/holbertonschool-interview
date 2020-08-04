@@ -38,29 +38,10 @@ heap_t *heap_insert(heap_t **root, int value)
  */
 heap_t *free_space(heap_t *root)
 {
-	heap_t *iterator = root;
-	heap_t *left = NULL, *right = NULL;
+	empty_space_t aux;
 
-	while (iterator)
-	{
-		left = iterator->left;
-		right = iterator->right;
-
-		if (left && right)
-		{
-			if (!left->left || !left->right)
-				return (left);
-			else if (!right->left || !right->right)
-				return (right);
-			iterator = left;
-			continue;
-		}
-		else if (!left || !right)
-		{
-			return (iterator);
-		}
-	}
-	return (iterator);
+	aux = find_space(root);
+	return (aux.node);
 }
 
 /**
@@ -87,4 +68,36 @@ heap_t *swap_nodes(heap_t *node)
 		return (iterator);
 	}
 	return (iterator);
+}
+
+/**
+ * find_space - Finds the space at the left
+ * @node: Parent node
+ * Return: An struct with the node and the deep
+ */
+empty_space_t find_space(heap_t *node)
+{
+	empty_space_t l, r, aux;
+
+	aux.node = node;
+	aux.deep = 0;
+
+	if (!node->left || !node->right)
+	{
+		return (aux);
+	}
+
+	l = find_space(node->left);
+	r = find_space(node->right);
+
+	if (l.deep <= r.deep)
+	{
+		l.deep += 1;
+		return (l);
+	}
+	else
+	{
+		r.deep += 1;
+		return (r);
+	}
 }
