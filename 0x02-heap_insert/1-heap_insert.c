@@ -63,7 +63,7 @@ heap_t *free_space(heap_t *root)
 			return (iterator);
 		}
 	}
-	return (NULL);
+	return (iterator);
 }
 
 /**
