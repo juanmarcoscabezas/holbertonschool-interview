@@ -29,9 +29,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		min->right = new_node;
 
 	new_node->parent = min;
-	swap_nodes(new_node);
-
-	return (new_node);
+	return (swap_nodes(new_node));
 }
 
 /**
@@ -71,7 +69,7 @@ heap_t *free_space(heap_t *root)
  * @node: Node to change position
  * Return:
  */
-void swap_nodes(heap_t *node)
+heap_t *swap_nodes(heap_t *node)
 {
 	int swap_aux;
 	heap_t *iterator = node;
@@ -87,6 +85,7 @@ void swap_nodes(heap_t *node)
 			iterator = iterator->parent;
 			continue;
 		}
-		break;
+		return (iterator);
 	}
+	return (iterator);
 }

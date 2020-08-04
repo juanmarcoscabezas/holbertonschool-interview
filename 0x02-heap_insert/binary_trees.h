@@ -28,6 +28,6 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
 
 heap_t *free_space(heap_t *parent);
-void swap_nodes(heap_t *node);
+heap_t *swap_nodes(heap_t *node);
 
 #endif /* _BINARY_TREES_H_ */
