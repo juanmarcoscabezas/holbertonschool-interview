@@ -9,7 +9,6 @@ def minOperations(n):
         copy = copy_str(my_str, copy)
         my_str = paste_str(my_str, copy)
         iterations += 1
-        print(my_str)
     return iterations
 
 
