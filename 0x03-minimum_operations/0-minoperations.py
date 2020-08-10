@@ -14,10 +14,11 @@ def minOperations(n):
     copy = ''
     iterations = 0
     while len(my_str) < n:
-        copy = copy_str(my_str)
+        if n % len(my_str) == 0:
+            copy = copy_str(my_str)
+            iterations += 1
         my_str = paste_str(my_str, copy)
-        iterations += 2
-        print(my_str)
+        iterations += 1
     return iterations
 
 
