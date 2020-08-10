@@ -8,7 +8,7 @@ def minOperations(n):
     """
     Finds the min operations
     """
-    if n <= 0:
+    if n <= 1:
         return 0
     my_str = 'H'
     copy = ''
