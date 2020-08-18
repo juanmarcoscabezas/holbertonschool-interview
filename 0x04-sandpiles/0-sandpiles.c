@@ -52,6 +52,7 @@ int is_stable(int grid1[3][3])
 void fix_sandpile(int grid1[3][3])
 {
 	int i, j;
+	int sand_grid1[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 	printf("=\n");
 	print_grid1(grid1);
@@ -63,16 +64,19 @@ void fix_sandpile(int grid1[3][3])
 			{
 				grid1[i][j] -= 4;
 				if (i >= 0 && i < 2)
-					grid1[i + 1][j] += 1;
+					sand_grid1[i + 1][j] += 1;
 				if (i > 0 && i <= 2)
-					grid1[i - 1][j] += 1;
+					sand_grid1[i - 1][j] += 1;
 				if (j >= 0 && j < 2)
-					grid1[i][j + 1] += 1;
+					sand_grid1[i][j + 1] += 1;
 				if (j > 0 && j <= 2)
-					grid1[i][j - 1] += 1;
+					sand_grid1[i][j - 1] += 1;
 			}
 		}
 	}
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+			grid1[i][j] += sand_grid1[i][j];
 }
 
 /**
