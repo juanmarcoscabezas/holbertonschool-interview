@@ -8,13 +8,23 @@
 int is_palindrome(listint_t **head)
 {
 	listint_t *iterator = *head;
+	int head_size = 0, list[2000], i_aux;
 
 	if (!iterator)
 		return (1);
 
 	while (iterator)
 	{
+		list[head_size] = iterator->n;
+		head_size++;
 		iterator = iterator->next;
+	}
+	for (i_aux = 0; i_aux < head_size; i_aux++)
+	{
+		if (list[i_aux] != list[head_size - 1 - i_aux])
+			return (0);
 	}
 	return (1);
 }
+
+
