@@ -21,7 +21,7 @@ int is_palindrome(listint_t **head)
 	}
 	for (i_aux = 0; i_aux < head_size; i_aux++)
 	{
-		if (list[i_aux] != list[head_size - 1 - i_aux])
+		if (i_aux > head_size / 2 || list[i_aux] != list[head_size - 1 - i_aux])
 			return (0);
 	}
 	return (1);
