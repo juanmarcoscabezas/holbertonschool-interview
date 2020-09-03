@@ -26,7 +26,7 @@ num_lines = 0
 
 def print_data():
     print('File size: {}'.format(total_file_size))
-    for key in codes.keys():
+    for key in sorted(codes.keys()):
         if codes[key] > 0:
             print('{}: {}'.format(key, codes[key]))
     return 0
@@ -45,3 +45,4 @@ if __name__ == '__main__':
                 num_lines += 1
     except (KeyboardInterrupt, EOFError):
         print_data()
+        exit()
