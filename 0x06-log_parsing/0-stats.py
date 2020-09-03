@@ -1,8 +1,14 @@
 #!/usr/bin/python3
 
-import fileinput
-import signal
+"""
+cript that reads stdin line by line and computes metrics:
+Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1"
+<status code> <file size>
+"""
+
+
 import sys
+
 
 total_file_size = 0
 codes = {
@@ -27,7 +33,7 @@ def print_data():
 
 if __name__ == '__main__':
     try:
-        for line in fileinput.input():
+        for line in sys.stdin:
             line = line.split(' ')
             size = line[-1]
             total_file_size += int(size)
