@@ -57,4 +57,5 @@ if __name__ == '__main__':
             num_lines += 1
     except KeyboardInterrupt:
         print_data()
-        exit()
+        raise
+    print_data()
