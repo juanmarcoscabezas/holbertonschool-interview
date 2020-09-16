@@ -39,7 +39,7 @@ int is_palindrome(unsigned long n)
  */
 int digitPos(unsigned long n, int pos)
 {
-	return ((n / (int) _pow(10.0, pos - 1)) % 10);
+	return ((n / (unsigned long) _pow(10.0, pos - 1)) % 10);
 }
 
 /**
