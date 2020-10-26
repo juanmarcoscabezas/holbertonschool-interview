@@ -23,28 +23,49 @@ if __name__ == '__main__':
 
     board = [[0 for col in range(n_q)] for row in range(n_q)]
 
-    def is_attack(i, j):
-        for k in range(n_q):
-            if board[i][k] == 1 or board[k][j] == 1:
-                return True
-        for k in range(n_q):
-            for l in range(n_q):
-                if ((k + l) == (i + j)) or ((k - l) == (i - j)):
-                    if board[k][l] == 1:
-                        return True
-        return False
+    def main():
+        b = [[0 for j in range(n_q)] for i in range(n_q)]
+        recursive_func(b, 0)
+        return
 
-    def n_queen(n):
-        if n == 0:
+    def recursive_func(b, c):
+        if (c == n_q):
+            solution(b)
             return True
+        ret = False
+        for i in range(n_q):
+            if (validate_pos(b, i, c)):
+                b[i][c] = 1
+                ret = recursive_func(b, c + 1) or ret
+                b[i][c] = 0
+        return ret
+
+    def validate_pos(b, r, c):
+        for i in range(c):
+            if (b[r][i]):
+                return False
+        i = r
+        j = c
+        while i >= 0 and j >= 0:
+            if(b[i][j]):
+                return False
+            i = i - 1
+            j = j - 1
+        i = r
+        j = c
+        while j >= 0 and i < n_q:
+            if(b[i][j]):
+                return False
+            i = i + 1
+            j = j - 1
+        return True
+
+    def solution(b):
+        solve = []
         for i in range(n_q):
             for j in range(n_q):
-                if (not(is_attack(i, j))) and (board[i][j] != 1):
-                    board[i][j] = 1
-                    if n_queen(n - 1):
-                        return True
-                    board[i][j] = 0
-        return False
-
-    n_queen(n_q)
-    print(board)
+                if(b[i][j] == 1):
+                    solve.append([i, j])
+        print(solve)
+        solve.clear()
+    main()
