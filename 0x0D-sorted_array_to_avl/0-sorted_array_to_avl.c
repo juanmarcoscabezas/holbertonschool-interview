@@ -23,32 +23,32 @@ avl_t *create_alv_node(int n)
 /**
  * create_binary_tree - Create AVL
  * @array: list of number to convert to b_tree
- * @first: index of the first num in the list
+ * @frs: index of the frs num in the list
  * @last: index of the last num in the list
  * @parent: pointer with the parent address
  * @or: n--neutro, l--left, r--right position
  * Return: a pointer head of the tree in succes, NULL otherwise
  */
-avl_t *create_binary_tree(int *array, size_t first, size_t last,
+avl_t *create_binary_tree(int *array, size_t frs, size_t last,
 	avl_t *parent, char or)
 {
 	avl_t *new_node = NULL, *last_node = NULL;
 
-	if (last - first > 1)
+	if (last - frs > 1)
 	{
-		new_node = create_alv_node(array[(int)((last + first) / 2) - 1]);
+		new_node = create_alv_node(array[(int)((last + frs) / 2) - 1]);
 		new_node->parent = parent;
 		if (or == 'l')
 			parent->left = new_node;
 		else if (or == 'r')
 			parent->right = new_node;
-		create_binary_tree(array, first, (int)((last + first) / 2) - 1, new_node, 'l');
-		create_binary_tree(array, (int)((last + first) / 2) + 1, last, new_node, 'r');
+		create_binary_tree(array, frs, (int)((last + frs) / 2) - 1, new_node, 'l');
+		create_binary_tree(array, (int)((last + frs) / 2) + 1, last, new_node, 'r');
 	}
-	else if (last - first == 1)
+	else if (last - frs == 1)
 	{
 		new_node = create_alv_node(array[last - 1]);
-		last_node = create_alv_node(array[first - 1]);
+		last_node = create_alv_node(array[frs - 1]);
 		if (or == 'l')
 		{
 			parent->left = last_node, last_node->parent = parent;
