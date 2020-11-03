@@ -21,7 +21,7 @@ avl_t *create_alv_node(int n)
 }
 
 /**
- * make_binary_tree - make the avl binary tree
+ * create_binary_tree - Create AVL
  * @array: list of number to convert to b_tree
  * @first: index of the first num in the list
  * @last: index of the last num in the list
@@ -29,7 +29,7 @@ avl_t *create_alv_node(int n)
  * @or: n--neutro, l--left, r--right position
  * Return: a pointer head of the tree in succes, NULL otherwise
  */
-avl_t *make_binary_tree(int *array, size_t first, size_t last,
+avl_t *create_binary_tree(int *array, size_t first, size_t last,
 	avl_t *parent, char or)
 {
 	avl_t *new_node = NULL, *last_node = NULL;
@@ -42,8 +42,8 @@ avl_t *make_binary_tree(int *array, size_t first, size_t last,
 			parent->left = new_node;
 		else if (or == 'r')
 			parent->right = new_node;
-		make_binary_tree(array, first, (int)((last + first) / 2) - 1, new_node, 'l');
-		make_binary_tree(array, (int)((last + first) / 2) + 1, last, new_node, 'r');
+		create_binary_tree(array, first, (int)((last + first) / 2) - 1, new_node, 'l');
+		create_binary_tree(array, (int)((last + first) / 2) + 1, last, new_node, 'r');
 	}
 	else if (last - first == 1)
 	{
@@ -74,9 +74,9 @@ avl_t *make_binary_tree(int *array, size_t first, size_t last,
 
 /**
  * sorted_array_to_avl - convert a sorted array to an avl b_tree
- * @array: sorted list of numbers
- * @size: size of the array
- * Return: a pointer head of the tree in succes, NULL otherwise
+ * @array: Array numbers
+ * @size: Size @array
+ * Return: a pointer head of the tree in succes
  */
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
@@ -96,5 +96,5 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 		last_node->right = new_node, new_node->parent = last_node;
 		return (last_node);
 	}
-	return (make_binary_tree(array, 1, size, NULL, 'n'));
+	return (create_binary_tree(array, 1, size, NULL, 'n'));
 }
