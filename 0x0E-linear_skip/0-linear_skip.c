@@ -2,7 +2,6 @@
 
 /**
  * linear_skip - Searches for a value in a sorted skip list of integers
- *
  * @list: List
  * @value: Value
  * Return: NULL on error
