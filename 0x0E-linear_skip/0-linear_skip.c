@@ -9,44 +9,44 @@
  */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	skiplist_t *list_c = list, *next_ex = NULL;
+	skiplist_t *list_ct = list, *next_ex = NULL;
 
 	if (!list)
 		return (NULL);
-	if (list_c->express && (list_c->index == list_c->express->index))
+	if (list_ct->express && (list_ct->index == list_ct->express->index))
 		return (printf("Value checked at index [%u] = [%d]\n",
-					   (unsigned int)list_c->index, list_c->n),
-				(list_c->n == value) ? list_c : NULL);
-	while (list_c->express)
+					   (unsigned int)list_ct->index, list_ct->n),
+				(list_ct->n == value) ? list_ct : NULL);
+	while (list_ct->express)
 	{
 		printf("Value checked at index [%u] = [%d]\n",
-			   (unsigned int)list_c->express->index, list_c->express->n);
-		if (value >= list_c->n && value <= list_c->express->n)
+			   (unsigned int)list_ct->express->index, list_ct->express->n);
+		if (value >= list_ct->n && value <= list_ct->express->n)
 		{
 			printf("Value found between indexes [%u] and [%u]\n",
-				   (unsigned int)list_c->index, (unsigned int)list_c->express->index);
+				   (unsigned int)list_ct->index, (unsigned int)list_ct->express->index);
 			break;
 		}
-		list_c = list_c->express;
+		list_ct = list_ct->express;
 	}
-	if (!list_c->express)
+	if (!list_ct->express)
 	{
-		next_ex = list_c;
+		next_ex = list_ct;
 		while (next_ex->next)
 			next_ex = next_ex->next;
 		printf("Value found between indexes [%u] and [%u]\n",
-			   (unsigned int)list_c->index, (unsigned int)next_ex->index);
+			   (unsigned int)list_ct->index, (unsigned int)next_ex->index);
 	}
-	next_ex = list_c->express;
-	while (list_c)
+	next_ex = list_ct->express;
+	while (list_ct)
 	{
 		printf("Value checked at index [%u] = [%d]\n",
-			   (unsigned int)list_c->index, list_c->n);
-		if (list_c == next_ex || list_c->n == value)
+			   (unsigned int)list_ct->index, list_ct->n);
+		if (list_ct == next_ex || list_ct->n == value)
 			break;
-		list_c = list_c->next;
+		list_ct = list_ct->next;
 	}
-	if (!list_c || (list_c == next_ex && list_c->n != next_ex->n))
+	if (!list_ct || (list_ct == next_ex && list_ct->n != next_ex->n))
 		return (NULL);
-	return (list_c);
+	return (list_ct);
 }
