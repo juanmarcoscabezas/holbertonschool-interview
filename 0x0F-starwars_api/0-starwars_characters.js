@@ -19,9 +19,11 @@ async function getRequest (url) {
 (async function main () {
   const movie = await getRequest(URL + 'films/' + idMovie);
   if (typeof (movie) === 'object') {
-    movie.characters.forEach(async characterURL => {
+    for (const characterURL of movie.characters) {
       const character = await getRequest(characterURL);
-      console.log(character.name);
-    });
+      if (typeof (character) === 'object') {
+        console.log(character.name);
+      }
+    }
   }
 })();
