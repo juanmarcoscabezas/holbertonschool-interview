@@ -16,18 +16,15 @@ async function getRequest (url) {
   });
 }
 
-(async function main () {
-  try {
-    const movie = await getRequest(URL + 'films/' + idMovie);
-    if (typeof (movie) === 'object') {
-      for (const characterURL of movie.characters) {
-        const character = await getRequest(characterURL);
-        if (typeof (character) === 'object') {
-          console.log(character.name);
-        }
+(async () => {
+  return getRequest(URL + 'films/' + idMovie);
+})().then(async (movie) => {
+  if (movie.detail !== 'Not found') {
+    for (const ch of movie.characters) {
+      const character = await getRequest(ch);
+      if (character.detail === undefined) {
+        console.log(character.name);
       }
     }
-  } catch (error) {
-
   }
-})();
+});
