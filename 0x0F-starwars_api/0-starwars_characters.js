@@ -6,7 +6,7 @@ Get characters from Star Wars Movie
 
 const request = require('request');
 const idMovie = process.argv[2];
-const url = 'https://swapi-api.hbtn.io/api/films' + idMovie;
+const url = 'https://swapi-api.hbtn.io/api/films/' + idMovie;
 
 const getName = async (ch) => {
   return new Promise((resolve, reject) => {
