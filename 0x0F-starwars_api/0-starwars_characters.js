@@ -17,13 +17,17 @@ async function getRequest (url) {
 }
 
 (async function main () {
-  const movie = await getRequest(URL + 'films/' + idMovie);
-  if (typeof (movie) === 'object') {
-    for (const characterURL of movie.characters) {
-      const character = await getRequest(characterURL);
-      if (typeof (character) === 'object') {
-        console.log(character.name);
+  try {
+    const movie = await getRequest(URL + 'films/' + idMovie);
+    if (typeof (movie) === 'object') {
+      for (const characterURL of movie.characters) {
+        const character = await getRequest(characterURL);
+        if (typeof (character) === 'object') {
+          console.log(character.name);
+        }
       }
     }
+  } catch (error) {
+
   }
 })();
