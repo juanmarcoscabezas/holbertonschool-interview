@@ -1,6 +1,7 @@
 #include "search_algos.h"
 
 void print_array(int *array, int start, int end);
+int binary_search(int *array, int first, int last, int value);
 
 /**
  * advanced_binary - Binary search
@@ -12,25 +13,38 @@ void print_array(int *array, int start, int end);
 int advanced_binary(int *array, size_t size, int value)
 {
 	int first = 0, last = size - 1;
+
+	if (!array || size == 0)
+		return (-1);
+	return (binary_search(array, first, last, value));
+}
+
+/**
+ * binary_search - Binary search
+ * @array: Array to make search
+ * @first: First position of @array
+ * @last: Last position of @array
+ * @value: Value toi find
+ * Return: Position of @value on @array on success, -1 otherwise
+ */
+int binary_search(int *array, int first, int last, int value)
+{
 	int middle = (first + last) / 2;
 
-	if (!array)
+	if (first > last)
 		return (-1);
 
-	while (first <= last)
-	{
-		print_array(array, first, last);
-		if (array[middle] < value)
-			first = middle + 1;
-		else if (array[middle] >= value)
-			last = middle;
+	print_array(array, first, last);
 
-		if (array[first] == value && first == middle)
-			return (first);
+	if (array[middle] < value)
+		return (binary_search(array, middle + 1, last, value));
+	else if (array[middle] >= value)
+		last = middle;
 
-		middle = (first + last) / 2;
-	}
-	return (-1);
+	if (array[first] == value && first == middle)
+		return (first);
+
+	return (binary_search(array, first, last, value));
 }
 
 /**
