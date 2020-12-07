@@ -2,6 +2,13 @@
 
 void print_array(int *array, int start, int end);
 
+/**
+ * advanced_binary - Binary search
+ * @array: Array to make search
+ * @size: Size of @array
+ * @value: Value toi find
+ * Return: Position of @value on @array on success, -1 otherwise
+ */
 int advanced_binary(int *array, size_t size, int value)
 {
 	int first = 0, last = size - 1;
@@ -16,15 +23,22 @@ int advanced_binary(int *array, size_t size, int value)
 		if (array[middle] < value)
 			first = middle + 1;
 		else
-			last = middle - 1;
-		if (array[middle] == value)
-			return (middle);
+			last = middle;
+		if (array[first] == value)
+			return (first);
 
 		middle = (first + last) / 2;
 	}
 	return (-1);
 }
 
+/**
+ * print_array - Print array
+ * @array: Array to make search
+ * @start: Position to start printing
+ * @end: Position to end printing
+ * Return:
+ */
 void print_array(int *array, int start, int end)
 {
 	int iterator;
