@@ -22,9 +22,10 @@ int advanced_binary(int *array, size_t size, int value)
 		print_array(array, first, last);
 		if (array[middle] < value)
 			first = middle + 1;
-		else
+		else if (array[middle] >= value)
 			last = middle;
-		if (array[first] == value)
+
+		if (array[first] == value && first == middle)
 			return (first);
 
 		middle = (first + last) / 2;
