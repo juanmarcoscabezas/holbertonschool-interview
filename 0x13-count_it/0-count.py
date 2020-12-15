@@ -29,7 +29,7 @@ def get_articles(subreddit, word_list, words_dict, after=""):
         sorted_w_desc = sorted(sorted_w, key=lambda tup: tup[1], reverse=True)
         for w in sorted_w_desc:
             if w[1]["count"] > 0:
-                print("{}: {}".format(w[0], w[1]["count"] * w[1]["mul"]))
+                print("{}: {}".format(w[0], w[1]["count"]))
         return
     return get_articles(subreddit, word_list, words_dict, after)
 
@@ -43,5 +43,4 @@ def count_words(subreddit, word_list):
             words_dict[w] = {"count": 0, "mul": 1}
         else:
             words_dict[w]["mul"] += 1
-    # words_dict = dict.fromkeys(word_list, 0)
     get_articles(subreddit, word_list, words_dict)
