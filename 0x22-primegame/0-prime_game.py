@@ -2,43 +2,44 @@
 """ Prime Game """
 
 
-def prime_colander(nums):
+def prime_colander(n, primes):
     """No prime"""
-    n = max(nums)
-    sieve = [True for _ in range(max(n + 1, 2))]
-    for i in range(2, int(pow(n, 0.5)) + 1):
-        if not sieve[i]:
-            continue
-        for j in range(i*i, n + 1, i):
-            sieve[j] = False
-
-    sieve[0] = sieve[1] = False
-    return sieve
+    lastPrime = primes[-1]
+    if n > lastPrime:
+        for i in range(lastPrime + 1, n + 1):
+            if primer_multiple_colander(i):
+                primes.append(i)
+            else:
+                primes.append(0)
 
 
-def primer_multiple_colander(sieve):
+def primer_multiple_colander(n):
     """Remove multiples of prime"""
-    c = 0
-    for i in range(len(sieve)):
-        if sieve[i]:
-            c += 1
-        sieve[i] = c
-
-    return sieve
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
 
 
 def isWinner(x, nums):
     """Determine who wins the game"""
-    if not nums or x < 1:
-        return None
-    sieve = prime_colander(nums)
-    sieve = primer_multiple_colander(sieve)
+    players = {"Maria": 0, "Ben": 0}
+    primes = [0, 0, 2]
+    prime_colander(max(nums), primes)
 
-    player1 = 0
-    for n in nums:
-        player1 += sieve[n] % 2 == 1
-    if player1 * 2 == len(nums):
-        return None
-    if player1 * 2 > len(nums):
+    for round in range(x):
+        total = sum((i != 0 and i <= nums[round])
+                    for i in primes[:nums[round] + 1])
+        if (total % 2):
+            winner = "Maria"
+        else:
+            winner = "Ben"
+        if winner:
+            players[winner] += 1
+
+    if players["Maria"] > players["Ben"]:
         return "Maria"
-    return "Ben"
+    if players["Maria"] < players["Ben"]:
+        return "Ben"
+    else:
+        return None
